@@ -1,5 +1,5 @@
 - name: create new users
-  hosts: hqdev1.tekneed.com
+  hosts: 
   tasks:
      - name: create new users
        user:
