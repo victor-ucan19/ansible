@@ -1,0 +1,11 @@
+- name: create new users
+  hosts: hqdev1.tekneed.com
+  tasks:
+     - name: create new users
+       user:
+         name: "{{ item }}"
+         state: present
+       loop:
+         - kehinde
+         - alex
+         - oyin

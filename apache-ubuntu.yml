@@ -1,0 +1,29 @@
+---
+ - name: Install, start and enable httpd
+   hosts: group1
+   tasks:
+     - name: Install httpd
+       yum:
+         name: httpd
+
+     - name: start and enable httpd
+       service:
+         name: httpd
+         state: started
+         enabled: true
+
+     - name: Allow httpd on firewall
+       firewalld:
+         service: httpd
+         state: enabled
+         permanent: true
+         immediate: true
+
+
+ - name: create a secondary apache user
+   hosts: localhost
+   tasks:
+     - name: create apacheuser1 user
+       user:
+         name: apacheuser1
+         group: wheel

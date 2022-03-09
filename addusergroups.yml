@@ -1,0 +1,40 @@
+# para a;adir a usuarios en grupos
+- name: Add users to groups
+  hosts: hqdev1.tekneed.com
+  tasks:
+    - name: add users to their groups
+      user:
+        name: "{{ item.name }}"
+        groups: "{{ item.groups }}"
+      loop:
+        - name: kehinde
+          groups: wheel
+        - name: alex
+          groups: finance
+        - name: oyin
+          groups: finance
+
+###########tambien se puede escribir en formato json de la siguiente manera
+- name: Add users to groups
+  hosts: hqdev1.tekneed.com
+  tasks:
+    - name: add users to their groups
+      user:
+        name: "{{ item.name }}"
+        groups: "{{ item.groups }}"
+      loop:
+        - { name: 'kehinde', groups: 'wheel' }
+        - { name: 'alex', groups: 'finance' }
+        - { name: 'oyin', groups: 'finance' }
+########### o de la forma antigua es decir usando with_items
+- name: Add users to groups
+  hosts: hqdev1.tekneed.com
+  tasks:
+    - name: add users to their groups
+      user:
+        name: "{{ item.name }}"
+        groups: "{{ item.groups }}"
+      with_items:
+        - { name: 'kehinde', groups: 'wheel' }
+        - { name: 'alex', groups: 'finance' }
+        - { name: 'oyin', groups: 'finance' }
